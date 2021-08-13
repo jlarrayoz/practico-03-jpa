@@ -16,8 +16,8 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
 
-        <!-- Version de apache derby -->
-        <version.derby>10.10.1.1</version.derby>
+        <!-- Version de apache derby compatible con java 9 o superior -->
+        <version.derby>10.15.2.0</version.derby>
     </properties>
 
     <dependencies>
@@ -26,7 +26,7 @@
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>org.eclipse.persistence.jpa</artifactId>
-            <version>3.0.2</version>
+            <version>2.7.9</version>
         </dependency>
 
         <!-- Hibernate validator -->
@@ -87,13 +87,28 @@
                 <version>3.0.0</version>
                 <executions>
                     <execution>
-                        <phase>install</phase>
                         <goals>
                             <goal>java</goal>
                         </goals>
-                        <configuration>
-                            <mainClass>uy.org.curso.jpa.Main</mainClass>
-                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>uy.org.curso.jpa.Main</mainClass>
+                </configuration>
+            </plugin>
+
+            <!-- Plugin para ejecutar Test de Integracion -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <executions>
+                    <execution>
+                        <id>integration-test</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>

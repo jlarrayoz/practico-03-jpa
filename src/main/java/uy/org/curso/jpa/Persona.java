@@ -1,15 +1,18 @@
 package uy.org.curso.jpa;
 
-import jakarta.persistence.*;
-
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
+@NamedQueries({
+        @NamedQuery(name="findAll", query = "select p from Persona p"),
+        @NamedQuery(name="findMe", query = "select p from Persona p where p.nroDocumento = '1234567-8'")
+})
 @Entity
 public class Persona {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotNull
@@ -62,5 +65,15 @@ public class Persona {
 
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
+    }
+
+    @Override
+    public String toString() {
+        return "Persona{" +
+                "id=" + id +
+                ", nombreCompleto='" + nombreCompleto + '\'' +
+                ", nroDocumento='" + nroDocumento + '\'' +
+                ", fechaNacimiento=" + fechaNacimiento +
+                '}';
     }
 }
