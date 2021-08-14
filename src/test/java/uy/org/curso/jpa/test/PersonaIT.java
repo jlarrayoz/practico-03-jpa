@@ -48,7 +48,7 @@ public class PersonaIT {
 	@Test
 	public void getAll() {
 		List<Persona> personas = em.createNamedQuery("findAll", Persona.class).getResultList();
-		assertEquals(3L, personas.size());
+		assertEquals(4L, personas.size());
 	}
 
 	/**
