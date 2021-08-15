@@ -4,14 +4,12 @@ package uy.org.curso.jpa.test;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import uy.org.curso.jpa.Persona;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import javax.validation.ConstraintViolationException;
-import java.util.Date;
-import java.util.List;
-
-import static junit.framework.TestCase.assertEquals;
 
 /**
  * Integration Test para Persona
@@ -38,8 +36,7 @@ public class PersonaIT {
 	 */
 	@Test
 	public void buscarme() {
-		Persona persona = em.createNamedQuery("findMe", Persona.class).getSingleResult();
-		assertEquals("1234567-8", persona.getNroDocumento());
+
 	}
 
 	/**
@@ -47,17 +44,14 @@ public class PersonaIT {
 	 */
 	@Test
 	public void getAll() {
-		List<Persona> personas = em.createNamedQuery("findAll", Persona.class).getResultList();
-		assertEquals(4L, personas.size());
+
 	}
 
 	/**
 	 * Insertar una persona que no cumpla con las constraints definidas para Persona
 	 */
 	@Test(expected = ConstraintViolationException.class)
-	public void contraintViolation() {
-		Persona p = new Persona(null, null, "6785231-5", new Date());
-		tx.begin();
-		em.persist(p);
+	public void constraintViolation() {
+
 	}
 }
